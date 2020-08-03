@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	Conf *Config
+	conf *Config
 	cfg  *ini.File
 	err  error
 
@@ -25,17 +25,27 @@ func init() {
 	cfg.NameMapper = ini.TitleUnderscore
 }
 
+// New configs
+func New() *Config {
+	if conf == nil {
+		return Load()
+	}
+
+	return conf
+}
+
+// Load configs
 func Load() *Config {
 	loadServerConfig()
 	loadFileConfig()
 	loadConnectConfig()
-	Conf = &Config{
+	conf = &Config{
 		Server:  *server,
 		File:    *file,
 		Connect: *connect,
 	}
 
-	return Conf
+	return conf
 }
 
 func getPath(name string) string {
@@ -66,7 +76,11 @@ func loadConnectConfig() {
 }
 
 func (conf *Config) GetImageUploadPath() string {
-	return conf.RuntimeRootPath + conf.File.Image.UploadPath
+	return conf.File.Image.UploadPath
+}
+
+func (conf *Config) GetFullImageUploadPath() string {
+	return conf.RuntimeRootPath + conf.GetImageUploadPath()
 }
 
 func (conf *Config) GetHttpPort() string {

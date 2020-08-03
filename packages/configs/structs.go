@@ -15,6 +15,7 @@ type Config struct {
 type Server struct {
 	Mode            string
 	RuntimeRootPath string
+	Lang            string
 	Http
 }
 
