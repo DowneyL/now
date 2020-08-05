@@ -1,2 +1,4 @@
-./runtime/
+runtime/
 .idea/
+tmp/
+*.exe
