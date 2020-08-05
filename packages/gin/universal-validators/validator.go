@@ -1,7 +1,7 @@
 package uv
 
 import (
-	"github.com/DowneyL/now/packages/locales"
+	"github.com/DowneyL/now/packages/gin/locales"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
@@ -26,10 +26,7 @@ var (
 func Universal() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		initValidate()
-		lang := locales.LanguageTag
-		if lang.String() == "und" {
-			panic("please register locale middleware first")
-		}
+		lang := locales.LanguageTag()
 		switch lang {
 		case language.English, language.AmericanEnglish, language.BritishEnglish:
 			enTranslationRegister()

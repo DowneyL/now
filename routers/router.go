@@ -2,8 +2,8 @@ package routers
 
 import (
 	"github.com/DowneyL/now/packages/configs"
-	"github.com/DowneyL/now/packages/locales"
-	uv "github.com/DowneyL/now/packages/universal-validators"
+	"github.com/DowneyL/now/packages/gin/locales"
+	uv "github.com/DowneyL/now/packages/gin/universal-validators"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -13,7 +13,7 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(config.Mode)
 	r := gin.New()
 	// 注册中间件
-	r.Use(handlerFuncList()...)
+	r.Use(middlewares()...)
 	// 静态文件
 	r.StaticFS(config.GetImageUploadPath(), http.Dir(config.GetFullImageUploadPath()))
 	// 路由
@@ -22,7 +22,7 @@ func InitRouter() *gin.Engine {
 	return r
 }
 
-func handlerFuncList() []gin.HandlerFunc {
+func middlewares() []gin.HandlerFunc {
 	return []gin.HandlerFunc{
 		gin.Logger(),
 		gin.Recovery(),

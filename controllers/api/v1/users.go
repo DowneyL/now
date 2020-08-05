@@ -2,7 +2,7 @@ package v1
 
 import (
 	"fmt"
-	"github.com/DowneyL/now/packages/universal-validators"
+	"github.com/DowneyL/now/packages/gin/universal-validators"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"net/http"

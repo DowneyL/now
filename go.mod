@@ -19,4 +19,4 @@ require (
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
 
-replace github.com/DowneyL/now/packages/universal-validators => ./packages/universal-validators
+replace github.com/DowneyL/now/packages/universal-validators => ./packages/gin/universal-validators
