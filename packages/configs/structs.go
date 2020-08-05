@@ -16,7 +16,7 @@ type Server struct {
 	Mode            string
 	RuntimeRootPath string
 	Lang            string
-	Http
+	Http            `ini:"server.http"`
 }
 
 type Http struct {
@@ -30,8 +30,8 @@ type Http struct {
 // File configs
 type File struct {
 	UploadPath string
-	Image
-	Log
+	Image      `ini:"file.image"`
+	Log        `ini:"file.log"`
 }
 
 type Image struct {
@@ -49,9 +49,9 @@ type Log struct {
 
 // Connect configs
 type Connect struct {
-	ReadDatabase  Database
-	WriteDatabase Database
-	Redis
+	ReadDatabase  Database `ini:"connect.database.read"`
+	WriteDatabase Database `ini:"connect.database.write"`
+	Redis         `ini:"connect.redis"`
 }
 
 type Database struct {

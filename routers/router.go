@@ -12,13 +12,10 @@ func InitRouter() *gin.Engine {
 	config := configs.New()
 	gin.SetMode(config.Mode)
 	r := gin.New()
-
 	// 注册中间件
 	r.Use(handlerFuncList()...)
-
 	// 静态文件
 	r.StaticFS(config.GetImageUploadPath(), http.Dir(config.GetFullImageUploadPath()))
-
 	// 路由
 	apiV1(r)
 

@@ -11,10 +11,6 @@ var (
 	conf *Config
 	cfg  *ini.File
 	err  error
-
-	server  = &Server{}
-	file    = &File{}
-	connect = &Connect{}
 )
 
 func init() {
@@ -27,23 +23,14 @@ func init() {
 
 // New configs
 func New() *Config {
-	if conf == nil {
-		return Load()
+	if conf != nil {
+		return conf
 	}
 
-	return conf
-}
-
-// Load configs
-func Load() *Config {
-	loadServerConfig()
-	loadFileConfig()
-	loadConnectConfig()
-	conf = &Config{
-		Server:  *server,
-		File:    *file,
-		Connect: *connect,
-	}
+	conf = &Config{}
+	load("server", &conf.Server)
+	load("file", &conf.File)
+	load("connect", &conf.Connect)
 
 	return conf
 }
@@ -52,27 +39,10 @@ func getPath(name string) string {
 	return fmt.Sprintf("./conf/%s.ini", name)
 }
 
-func loadConfig(section string, v interface{}) {
+func load(section string, v interface{}) {
 	if err := cfg.Section(section).MapTo(v); err != nil {
 		log.Fatalf("%s configs map to struct err: %v\n", section, err)
 	}
-}
-
-func loadServerConfig() {
-	loadConfig("server", server)
-	loadConfig("server.http", &server.Http)
-}
-
-func loadFileConfig() {
-	loadConfig("file", file)
-	loadConfig("file.image", &file.Image)
-	loadConfig("file.log", &file.Log)
-}
-
-func loadConnectConfig() {
-	loadConfig("database.read", &connect.ReadDatabase)
-	loadConfig("database.write", &connect.WriteDatabase)
-	loadConfig("redis", &connect.Redis)
 }
 
 func (conf *Config) GetImageUploadPath() string {

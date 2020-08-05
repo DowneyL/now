@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	config := configs.Load()
+	config := configs.New()
 
 	r := routers.InitRouter()
 	server := &http.Server{
