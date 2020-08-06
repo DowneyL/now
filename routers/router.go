@@ -1,9 +1,8 @@
 package routers
 
 import (
+	middleware "github.com/DowneyL/now/middlewares"
 	"github.com/DowneyL/now/packages/configs"
-	"github.com/DowneyL/now/packages/gin/locales"
-	uv "github.com/DowneyL/now/packages/gin/universal-validators"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -26,7 +25,7 @@ func middlewares() []gin.HandlerFunc {
 	return []gin.HandlerFunc{
 		gin.Logger(),
 		gin.Recovery(),
-		locales.Local(),
-		uv.Universal(),
+		middleware.Local(),
+		middleware.UniversalValidator(),
 	}
 }

@@ -18,5 +18,3 @@ require (
 	gopkg.in/ini.v1 v1.57.0
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
-
-replace github.com/DowneyL/now/packages/universal-validators => ./packages/gin/universal-validators

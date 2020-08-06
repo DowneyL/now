@@ -1,11 +1,8 @@
 package v1
 
 import (
-	"fmt"
-	"github.com/DowneyL/now/packages/gin/universal-validators"
+	gresp "github.com/DowneyL/now/packages/http/response"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
-	"net/http"
 )
 
 type User struct {
@@ -16,13 +13,10 @@ type User struct {
 
 func Register(c *gin.Context) {
 	var user User
-	if err := c.BindJSON(&user); err != nil {
-		errs := err.(validator.ValidationErrors)
-		c.JSON(http.StatusInternalServerError, map[string]string{
-			"err": fmt.Sprintf("%v", errs.Translate(uv.Trans)),
-		})
+	if err := c.ShouldBindJSON(&user); err != nil {
+		gresp.InvalidArgumentError(c, err)
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]string{})
+	gresp.Success(c, map[string]string{})
 }

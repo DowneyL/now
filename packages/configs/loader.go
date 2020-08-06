@@ -26,7 +26,6 @@ func New() *Config {
 	if conf != nil {
 		return conf
 	}
-
 	conf = &Config{}
 	load("server", &conf.Server)
 	load("file", &conf.File)
@@ -63,4 +62,8 @@ func (conf *Config) GetHttpReadTimeout() time.Duration {
 
 func (conf *Config) GetHttpWriteTimeout() time.Duration {
 	return conf.Http.WriteTimeout * time.Second
+}
+
+func (conf *Config) GetDefaultLanguage() string {
+	return conf.Server.Lang
 }
