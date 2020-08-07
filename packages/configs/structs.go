@@ -16,6 +16,7 @@ type Server struct {
 	Mode            string
 	RuntimeRootPath string
 	Lang            string
+	AcceptLang      []string
 	Http            `ini:"server.http"`
 }
 

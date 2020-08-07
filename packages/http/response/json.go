@@ -1,9 +1,11 @@
 package gresp
 
 import (
+	"github.com/DowneyL/now/packages/locales"
 	uv "github.com/DowneyL/now/packages/uv"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"net/http"
 )
 
@@ -39,7 +41,11 @@ func argumentError(err error) *response {
 		errorStrList[i] = errors[i].Translate(uv.Trans)
 	}
 
-	return errorResp(-1, "参数校验失败", errorStrList)
+	message := locales.Translator.MustLocalize(&i18n.LocalizeConfig{
+		MessageID: "hello",
+	})
+
+	return errorResp(-1, message, errorStrList)
 }
 
 func Success(c *gin.Context, data interface{}) {
@@ -49,5 +55,3 @@ func Success(c *gin.Context, data interface{}) {
 func InvalidArgumentError(c *gin.Context, err error) {
 	c.JSON(http.StatusBadRequest, argumentError(err))
 }
-
-
