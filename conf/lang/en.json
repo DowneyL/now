@@ -1,3 +1,21 @@
 {
-  "hello": "Hello"
+  "hello": "Hello",
+  "response": {
+    "ok": "ok",
+    "failed": "failed",
+    "canceled": "canceled",
+    "unknown": "unknown",
+    "invalid_argument": "invalid argument",
+    "deadline_exceeded": "deadline exceeded",
+    "not_found": "not found",
+    "already_exists": "already exists",
+    "permission_denied": "permission denied",
+    "resource_exhausted": "resource exhausted",
+    "aborted": "aborted",
+    "out_of_range": "out of range",
+    "internal": "internal",
+    "unavailable": "unavailable",
+    "data_loss": "data loss",
+    "unauthenticated": "unauthenticated"
+  }
 }

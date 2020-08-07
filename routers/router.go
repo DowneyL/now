@@ -1,7 +1,7 @@
 package routers
 
 import (
-	middleware "github.com/DowneyL/now/middlewares"
+	"github.com/DowneyL/now/middlewares"
 	"github.com/DowneyL/now/packages/configs"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"

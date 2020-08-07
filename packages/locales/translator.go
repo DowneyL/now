@@ -24,3 +24,9 @@ func New(bundle *i18n.Bundle, lang string) *Translate {
 func (tran *Translate) GetLanguageTag() language.Tag {
 	return tran.languageTag
 }
+
+func (tran *Translate) MustTrans(messageId string) string {
+	return tran.MustLocalize(&i18n.LocalizeConfig{
+		MessageID: messageId,
+	})
+}

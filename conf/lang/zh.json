@@ -1,3 +1,21 @@
 {
-  "hello": "你好"
+  "hello": "你好",
+  "response": {
+    "ok": "成功",
+    "failed": "失败",
+    "canceled": "取消",
+    "unknown": "未知",
+    "invalid_argument": "参数异常",
+    "deadline_exceeded": "已过期",
+    "not_found": "未找到指定数据",
+    "already_exists": "指定数据已存在",
+    "permission_denied": "没有权限",
+    "resource_exhausted": "资源溢出",
+    "aborted": "退出",
+    "out_of_range": "超出临界值",
+    "internal": "内部错误",
+    "unavailable": "数据不可用",
+    "data_loss": "数据丢失",
+    "unauthenticated": "未被认证"
+  }
 }

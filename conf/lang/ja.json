@@ -1,3 +1,21 @@
 {
-  "hello": "kon ni chi wa"
+  "hello": "こんにちは",
+  "response": {
+    "ok": "成功",
+    "failed": "失敗",
+    "canceled": "キャンセル",
+    "unknown": "不明",
+    "invalid_argument": "パラメーター例外",
+    "deadline_exceeded": "期限切れ",
+    "not_found": "指定されたデータが見つかりませんでした",
+    "already_exists": "指定されたデータは既に存在します",
+    "permission_denied": "許可なし",
+    "resource_exhausted": "リソースオーバーフロー",
+    "aborted": "終了",
+    "out_of_range": "限界値を超えています",
+    "internal": "内部エラー",
+    "unavailable": "データが利用できません",
+    "data_loss": "データ損失",
+    "unauthenticated": "未認証"
+  }
 }
