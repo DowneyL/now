@@ -61,6 +61,7 @@ type Database struct {
 	Password    string
 	Name        string
 	Host        string
+	Port        uint
 	TablePrefix string
 }
 

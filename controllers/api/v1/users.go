@@ -20,3 +20,7 @@ func Register(c *gin.Context) {
 
 	gresp.Success(c, map[string]string{})
 }
+
+func Login(c *gin.Context) {
+	
+}

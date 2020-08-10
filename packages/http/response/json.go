@@ -23,10 +23,16 @@ func successResponse(data interface{}) *response {
 	}
 }
 
-func errorResponse(code Code, errors []string) *response {
+func errorResponse(code Code, message string, errors []string) *response {
+	if message == "" {
+		message = code.String()
+	}
+	if len(errors) == 0 {
+		errors = nil
+	}
 	return &response{
 		Code:    code,
-		Message: code.String(),
+		Message: message,
 		Errors:  errors,
 		Data:    gin.H{},
 	}
@@ -39,11 +45,15 @@ func argumentErrorResponse(err error) *response {
 		errorStrList[i] = errors[i].Translate(uv.Trans)
 	}
 
-	return errorResponse(InvalidArgument, errorStrList)
+	return errorResponse(InvalidArgument, "", errorStrList)
 }
 
 func Success(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, successResponse(data))
+}
+
+func FailedError(c *gin.Context, err error) {
+	c.JSON(http.StatusInternalServerError, errorResponse(Failed, err.Error(), nil))
 }
 
 func InvalidArgumentError(c *gin.Context, err error) {

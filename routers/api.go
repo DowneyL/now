@@ -13,5 +13,6 @@ func apiV1(r *gin.Engine) {
 			c.Data(http.StatusOK, "text/plain", []byte("Hello gin"))
 		})
 		apiV1.POST("/register", v1.Register)
+		apiV1.GET("/database/migrate", v1.Migrate)
 	}
 }
