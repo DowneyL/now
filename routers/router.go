@@ -3,6 +3,7 @@ package routers
 import (
 	"github.com/DowneyL/now/middlewares"
 	"github.com/DowneyL/now/packages/configs"
+	"github.com/DowneyL/now/packages/uv"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
@@ -48,19 +49,25 @@ func getBindingValidate() *validator.Validate {
 	if !ok {
 		log.Fatalln("binding validator is not correct")
 	}
+
+	_ = validate.RegisterValidation(uv.NotExistsTag, uv.NotExists)
 	validate.RegisterTagNameFunc(func(field reflect.StructField) string {
-		getFieldName := func(str string) string {
-			return strings.SplitN(field.Tag.Get(str), ",", 2)[0]
-		}
-		name := getFieldName("json")
-		if name == "" {
-			name = getFieldName("form")
-		}
-		if name == "-" {
-			return ""
-		}
-		return name
+		return getValidatorFieldName(field)
 	})
 
 	return validate
+}
+
+func getValidatorFieldName(field reflect.StructField) string {
+	getFieldName := func(str string) string {
+		return strings.SplitN(field.Tag.Get(str), ",", 2)[0]
+	}
+	name := getFieldName("json")
+	if name == "" {
+		name = getFieldName("form")
+	}
+	if name == "-" {
+		return ""
+	}
+	return name
 }

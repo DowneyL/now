@@ -1,6 +1,7 @@
 package locales
 
 import (
+	"errors"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
 )
@@ -29,4 +30,10 @@ func (tran *Translate) MustTrans(messageId string) string {
 	return tran.MustLocalize(&i18n.LocalizeConfig{
 		MessageID: messageId,
 	})
+}
+
+func (tran *Translate) MustTransAsError(messageId string) error {
+	message := tran.MustTrans(messageId)
+
+	return errors.New(message)
 }

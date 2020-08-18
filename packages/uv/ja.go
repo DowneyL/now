@@ -16,4 +16,7 @@ func RegisterJaTranslation(validate *validator.Validate) {
 	if err := jaTranslation.RegisterDefaultTranslations(validate, Trans); err != nil {
 		log.Fatalf("universal Trans register failed: %v\n", err)
 	}
+	if err := registerLocaleTranslation(validate, NotExistsTag, "{0} 既存"); err != nil {
+		log.Fatalln("register locale translation failed")
+	}
 }

@@ -16,6 +16,7 @@
     "internal": "internal",
     "unavailable": "unavailable",
     "data_loss": "data loss",
-    "unauthenticated": "unauthenticated"
+    "unauthenticated": "unauthenticated",
+    "username_already_exists": "username is already exists"
   }
 }

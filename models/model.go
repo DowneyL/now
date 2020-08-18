@@ -17,9 +17,9 @@ var (
 )
 
 type BaseModel struct {
-	ID          uint       `gorm:"primary_key;type:bigint(20) unsigned not null auto_increment;comment:'主键ID'" json:"id"`
-	CreatedTime time.Time  `gorm:"not null;default:current_timestamp;comment:'创建时间'" json:"created_time"`
-	UpdatedTime time.Time  `gorm:"not null;default:current_timestamp on update current_timestamp;comment:'更新时间'" json:"updated_time"`
+	ID          uint      `gorm:"primary_key;type:bigint(20) unsigned not null auto_increment;comment:'主键ID'" json:"id"`
+	CreatedTime time.Time `gorm:"not null;default:current_timestamp;comment:'创建时间'" json:"created_time"`
+	UpdatedTime time.Time `gorm:"not null;default:current_timestamp on update current_timestamp;comment:'更新时间'" json:"updated_time"`
 }
 
 type Model struct {

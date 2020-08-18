@@ -16,6 +16,7 @@
     "internal": "内部エラー",
     "unavailable": "データが利用できません",
     "data_loss": "データ損失",
-    "unauthenticated": "未認証"
+    "unauthenticated": "未認証",
+    "username_already_exists": "username is already exists"
   }
 }

@@ -16,4 +16,7 @@ func RegisterZhTranslation(validate *validator.Validate) {
 	if err := zhTranslation.RegisterDefaultTranslations(validate, Trans); err != nil {
 		log.Fatalf("universal Trans register failed: %v\n", err)
 	}
+	if err := registerLocaleTranslation(validate, NotExistsTag, "{0} 已存在"); err != nil {
+		log.Fatalln("register locale translation failed")
+	}
 }
