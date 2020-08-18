@@ -7,7 +7,6 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
-	"time"
 )
 
 var (
@@ -17,14 +16,14 @@ var (
 )
 
 type BaseModel struct {
-	ID          uint      `gorm:"primary_key;type:bigint(20) unsigned not null auto_increment;comment:'主键ID'" json:"id"`
-	CreatedTime time.Time `gorm:"not null;default:current_timestamp;comment:'创建时间'" json:"created_time"`
-	UpdatedTime time.Time `gorm:"not null;default:current_timestamp on update current_timestamp;comment:'更新时间'" json:"updated_time"`
+	ID          uint     `gorm:"primary_key;type:bigint(20) unsigned not null auto_increment;comment:'主键ID'" json:"id"`
+	CreatedTime DateTime `gorm:"not null;default:current_timestamp;comment:'创建时间'" json:"created_time"`
+	UpdatedTime DateTime `gorm:"not null;default:current_timestamp on update current_timestamp;comment:'更新时间'" json:"updated_time"`
 }
 
 type Model struct {
 	BaseModel
-	DeletedTime *time.Time `sql:"index;not null;default:'1970-01-01 00:00:00';comment:'删除时间'" json:"-"`
+	DeletedTime *DateTime `sql:"index;not null;default:'1970-01-01 00:00:00';comment:'删除时间'" json:"-"`
 }
 
 func SetUp() {
