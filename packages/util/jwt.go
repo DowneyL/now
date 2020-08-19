@@ -14,7 +14,7 @@ type Claims struct {
 
 type Auth struct {
 	Token     string   `json:"token"`
-	ExpiredAt DateTime `json:"expired_at"`
+	ExpiredAt *DateTime `json:"expired_at"`
 }
 
 func getJwtSecret() []byte {
@@ -40,7 +40,7 @@ func GenerateAuth(username, password string) (Auth, error) {
 		return Auth{}, err
 	}
 
-	return Auth{token, DateTime{expireTime}}, nil
+	return Auth{token, &DateTime{expireTime}}, nil
 }
 
 func ParseToken(token string) (*Claims, error) {

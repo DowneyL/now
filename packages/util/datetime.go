@@ -14,7 +14,7 @@ func (t *DateTime) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.Format("2006-01-02 15:04:05"))), nil
 }
 
-func (t *DateTime) UnmarshalJSON(data []byte) error {
+func (t DateTime) UnmarshalJSON(data []byte) error {
 	var err error
 
 	t.Time, err = time.Parse(`"2006-01-02 15:04:05"`, string(data))
@@ -41,6 +41,6 @@ func (t *DateTime) Scan(src interface{}) error {
 	return nil
 }
 
-func (t *DateTime) Value() (driver.Value, error) {
+func (t DateTime) Value() (driver.Value, error) {
 	return t.Time.Format("2006-01-02 15:04:05"), nil
 }

@@ -51,6 +51,11 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	if user.State == models.InvalidState {
+		gresp.FailedError(c, locales.MustTransRespError("forbidden_user"))
+		return
+	}
+
 	if flag := util.ConfirmPassword(user.Password, json.Password); !flag {
 		gresp.FailedError(c, locales.MustTransRespError("wrong_password"))
 		return

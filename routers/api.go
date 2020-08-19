@@ -20,5 +20,6 @@ func apiV1(r *gin.Engine) {
 	group.Use(middleware.Jwt())
 	{
 		group.GET("/database/migrate", v1.Migrate)
+		group.POST("/user/email", v1.SetEmail)
 	}
 }

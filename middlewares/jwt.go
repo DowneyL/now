@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"github.com/DowneyL/now/models"
 	gresp "github.com/DowneyL/now/packages/http/response"
 	"github.com/DowneyL/now/packages/locales"
 	"github.com/DowneyL/now/packages/util"
@@ -30,6 +31,14 @@ func Jwt() gin.HandlerFunc {
 			return
 		}
 
+		user := models.FindUserByName(claims.Username)
+		if user.State == models.InvalidState {
+			gresp.FailedError(c, locales.MustTransRespError("forbidden_user"))
+			c.Abort()
+			return
+		}
+
+		c.Set("user", user)
 		c.Next()
 	}
 }
