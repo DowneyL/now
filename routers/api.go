@@ -10,6 +10,7 @@ import (
 func api(r *gin.Engine) {
 	group := r.Group("/api")
 	{
+		group.GET("/database/migrate", apiController.Migrate)
 		group.POST("/user", apiController.Register)
 		group.POST("/user/login", apiController.Login)
 	}
@@ -19,7 +20,6 @@ func apiV1(r *gin.Engine) {
 	group := r.Group("/api/v1")
 	group.Use(middleware.Jwt())
 	{
-		group.GET("/database/migrate", v1.Migrate)
 		group.POST("/user/email", v1.SetEmail)
 	}
 }

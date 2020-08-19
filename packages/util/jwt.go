@@ -13,7 +13,7 @@ type Claims struct {
 }
 
 type Auth struct {
-	Token     string   `json:"token"`
+	Token     string    `json:"token"`
 	ExpiredAt *DateTime `json:"expired_at"`
 }
 
