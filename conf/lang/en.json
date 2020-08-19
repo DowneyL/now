@@ -17,6 +17,11 @@
     "unavailable": "unavailable",
     "data_loss": "data loss",
     "unauthenticated": "unauthenticated",
-    "username_already_exists": "username is already exists"
+    "username_already_exists": "username is already exists",
+    "user_not_exists": "user is not exists",
+    "token_not_exists": "token is not exists",
+    "token_parse_error": "parse token error",
+    "token_already_expired": "token is already expired",
+    "wrong_password": "password is wrong"
   }
 }

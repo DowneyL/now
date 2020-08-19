@@ -38,7 +38,7 @@ func errorResponse(code Code, message string, errors []string) *response {
 	}
 }
 
-func argumentErrorResponse(err error) *response {
+func bindErrorResponse(err error) *response {
 	errors := err.(validator.ValidationErrors)
 	errorStrList := make([]string, len(errors))
 	for i := 0; i < len(errors); i++ {
@@ -52,14 +52,22 @@ func Success(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, successResponse(data))
 }
 
+func Error(c *gin.Context, code Code, message string, messages []string) {
+	c.JSON(http.StatusBadRequest, errorResponse(code, message, messages))
+}
+
+func ServerError(c *gin.Context, err error) {
+	Error(c, Internal, err.Error(), nil)
+}
+
 func FailedError(c *gin.Context, err error) {
 	Error(c, Failed, err.Error(), nil)
 }
 
 func BindError(c *gin.Context, err error) {
-	c.JSON(http.StatusBadRequest, argumentErrorResponse(err))
+	c.JSON(http.StatusBadRequest, bindErrorResponse(err))
 }
 
-func Error(c *gin.Context, code Code, message string, messages []string) {
-	c.JSON(http.StatusBadRequest, errorResponse(code, message, messages))
+func InvalidArgumentError(c *gin.Context, err error) {
+	Error(c, InvalidArgument, err.Error(), nil)
 }

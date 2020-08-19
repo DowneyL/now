@@ -29,6 +29,7 @@ func InitRouter() *gin.Engine {
 	// 静态文件
 	r.StaticFS(config.GetImageUploadPath(), http.Dir(config.GetFullImageUploadPath()))
 	// 路由
+	api(r)
 	apiV1(r)
 
 	return r

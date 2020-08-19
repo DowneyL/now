@@ -2,6 +2,7 @@ package locales
 
 import (
 	"errors"
+	"fmt"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
 )
@@ -36,4 +37,13 @@ func (tran *Translate) MustTransAsError(messageId string) error {
 	message := tran.MustTrans(messageId)
 
 	return errors.New(message)
+}
+
+func MustTransAsError(messageId string) error {
+	return Translator.MustTransAsError(messageId)
+}
+
+func MustTransRespError(messageId string) error {
+	messageId = fmt.Sprintf("response.%s", messageId)
+	return MustTransAsError(messageId)
 }

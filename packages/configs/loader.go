@@ -84,3 +84,7 @@ func (conf *Config) GetNeedLoadLangFile() (files []string) {
 	}
 	return
 }
+
+func (conf *Config) GetJwtSecret() string {
+	return conf.Server.Http.JwtSecret
+}

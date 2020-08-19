@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"github.com/DowneyL/now/packages/configs"
+	"github.com/DowneyL/now/packages/util"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -10,39 +11,39 @@ import (
 )
 
 var (
-	db  *gorm.DB
-	wdb *gorm.DB
-	err error
+	DB      *gorm.DB
+	WriteDB *gorm.DB
+	err     error
 )
 
 type BaseModel struct {
-	ID          uint     `gorm:"primary_key;type:bigint(20) unsigned not null auto_increment;comment:'主键ID'" json:"id"`
-	CreatedTime DateTime `gorm:"not null;default:current_timestamp;comment:'创建时间'" json:"created_time"`
-	UpdatedTime DateTime `gorm:"not null;default:current_timestamp on update current_timestamp;comment:'更新时间'" json:"updated_time"`
+	ID          uint          `gorm:"primary_key;type:bigint(20) unsigned not null auto_increment;comment:'主键ID'" json:"id"`
+	CreatedTime util.DateTime `gorm:"not null;default:current_timestamp;comment:'创建时间'" json:"created_time"`
+	UpdatedTime util.DateTime `gorm:"not null;default:current_timestamp on update current_timestamp;comment:'更新时间'" json:"updated_time"`
 }
 
 type Model struct {
 	BaseModel
-	DeletedTime *DateTime `sql:"index;not null;default:'1970-01-01 00:00:00';comment:'删除时间'" json:"-"`
+	DeletedTime *util.DateTime `sql:"index;not null;default:'1970-01-01 00:00:00';comment:'删除时间'" json:"-"`
 }
 
 func SetUp() {
 	config := configs.New()
 	readDatabase := config.ReadDatabase
 	readConnect := getDBConnectInfo(readDatabase)
-	db, err = gorm.Open(readDatabase.Type, readConnect)
+	DB, err = gorm.Open(readDatabase.Type, readConnect)
 	if err != nil {
-		log.Fatalf("read db connect error:%v", err)
+		log.Fatalf("read DB connect error:%v", err)
 	}
-	setup(db, config)
+	setup(DB, config)
 
 	writeDatabase := config.WriteDatabase
 	writeConnect := getDBConnectInfo(writeDatabase)
-	wdb, err = gorm.Open(writeDatabase.Type, writeConnect)
+	WriteDB, err = gorm.Open(writeDatabase.Type, writeConnect)
 	if err != nil {
-		log.Fatalf("write db connect error:%v", err)
+		log.Fatalf("write DB connect error:%v", err)
 	}
-	setup(wdb, config)
+	setup(WriteDB, config)
 }
 
 func Close(db *gorm.DB) {
