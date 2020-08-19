@@ -1,17 +1,25 @@
 package routers
 
 import (
+	apiController "github.com/DowneyL/now/controllers/api"
 	v1 "github.com/DowneyL/now/controllers/api/v1"
+	middleware "github.com/DowneyL/now/middlewares"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-func apiV1(r *gin.Engine) {
-	apiV1 := r.Group("/api/v1")
+func api(r *gin.Engine) {
+	group := r.Group("/api")
 	{
-		apiV1.GET("/", func(c *gin.Context) {
-			c.Data(http.StatusOK, "text/plain", []byte("Hello gin"))
-		})
-		apiV1.POST("/register", v1.Register)
+		group.GET("/database/migrate", apiController.Migrate)
+		group.POST("/user", apiController.Register)
+		group.POST("/user/login", apiController.Login)
+	}
+}
+
+func apiV1(r *gin.Engine) {
+	group := r.Group("/api/v1")
+	group.Use(middleware.Jwt())
+	{
+		group.POST("/user/email", v1.SetEmail)
 	}
 }

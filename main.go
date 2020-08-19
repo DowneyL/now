@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/DowneyL/now/models"
 	"github.com/DowneyL/now/packages/configs"
 	"github.com/DowneyL/now/routers"
 	"log"
@@ -9,6 +10,7 @@ import (
 
 func main() {
 	config := configs.New()
+	models.SetUp()
 
 	r := routers.InitRouter()
 	server := &http.Server{

@@ -2,24 +2,24 @@ package middleware
 
 import (
 	"github.com/DowneyL/now/packages/locales"
-	uv "github.com/DowneyL/now/packages/uv"
+	"github.com/DowneyL/now/packages/uv"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"golang.org/x/text/language"
 )
 
 // Used by gin middleware
-func UniversalValidator() gin.HandlerFunc {
+func UniversalValidator(validate *validator.Validate) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		lang := locales.GetLanguageTag()
-		switch lang {
+		switch locales.Translator.GetLanguageTag() {
 		case language.English, language.AmericanEnglish, language.BritishEnglish:
-			uv.RegisterEnTranslation()
+			uv.RegisterEnTranslation(validate)
 		case language.Chinese, language.SimplifiedChinese, language.TraditionalChinese:
-			uv.RegisterZhTranslation()
+			uv.RegisterZhTranslation(validate)
 		case language.Japanese:
-			uv.RegisterJaTranslation()
+			uv.RegisterJaTranslation(validate)
 		default:
-			uv.RegisterZhTranslation()
+			uv.RegisterZhTranslation(validate)
 		}
 	}
 }

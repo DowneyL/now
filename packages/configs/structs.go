@@ -16,6 +16,7 @@ type Server struct {
 	Mode            string
 	RuntimeRootPath string
 	Lang            string
+	AcceptLang      []string
 	Http            `ini:"server.http"`
 }
 
@@ -60,6 +61,7 @@ type Database struct {
 	Password    string
 	Name        string
 	Host        string
+	Port        uint
 	TablePrefix string
 }
 

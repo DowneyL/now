@@ -1,0 +1,29 @@
+{
+  "hello": "Hello",
+  "response": {
+    "ok": "ok",
+    "failed": "failed",
+    "canceled": "canceled",
+    "unknown": "unknown",
+    "invalid_argument": "invalid argument",
+    "deadline_exceeded": "deadline exceeded",
+    "not_found": "not found",
+    "already_exists": "already exists",
+    "permission_denied": "permission denied",
+    "resource_exhausted": "resource exhausted",
+    "aborted": "aborted",
+    "out_of_range": "out of range",
+    "internal": "internal",
+    "unavailable": "unavailable",
+    "data_loss": "data loss",
+    "unauthenticated": "unauthenticated",
+    "username_already_exists": "username is already exists",
+    "user_not_exists": "user is not exists",
+    "forbidden_user": "user is already forbidden",
+    "token_not_exists": "token is not exists",
+    "token_parse_error": "parse token error",
+    "token_already_expired": "token is already expired",
+    "wrong_password": "password is wrong",
+    "email_exists": "email is already exists"
+  }
+}

@@ -8,22 +8,28 @@ import (
 )
 
 type response struct {
-	Code    int         `json:"code"`
-	Message string      `json:"message"`
+	Code    Code        `json:"code"`
+	Message string      `json:"message,omitempty"`
 	Errors  []string    `json:"errors,omitempty"`
 	Data    interface{} `json:"data"`
 }
 
-func defaultResp(data interface{}) *response {
+func successResponse(data interface{}) *response {
 	return &response{
-		Code:    0,
-		Message: "",
+		Code:    OK,
+		Message: OK.String(),
 		Errors:  nil,
 		Data:    data,
 	}
 }
 
-func errorResp(code int, message string, errors []string) *response {
+func errorResponse(code Code, message string, errors []string) *response {
+	if message == "" {
+		message = code.String()
+	}
+	if len(errors) == 0 {
+		errors = nil
+	}
 	return &response{
 		Code:    code,
 		Message: message,
@@ -32,22 +38,36 @@ func errorResp(code int, message string, errors []string) *response {
 	}
 }
 
-func argumentError(err error) *response {
+func bindErrorResponse(err error) *response {
 	errors := err.(validator.ValidationErrors)
 	errorStrList := make([]string, len(errors))
 	for i := 0; i < len(errors); i++ {
 		errorStrList[i] = errors[i].Translate(uv.Trans)
 	}
 
-	return errorResp(-1, "参数校验失败", errorStrList)
+	return errorResponse(InvalidArgument, "", errorStrList)
 }
 
 func Success(c *gin.Context, data interface{}) {
-	c.JSON(http.StatusOK, defaultResp(data))
+	c.JSON(http.StatusOK, successResponse(data))
+}
+
+func Error(c *gin.Context, code Code, message string, messages []string) {
+	c.JSON(http.StatusBadRequest, errorResponse(code, message, messages))
+}
+
+func ServerError(c *gin.Context, err error) {
+	Error(c, Internal, err.Error(), nil)
+}
+
+func FailedError(c *gin.Context, err error) {
+	Error(c, Failed, err.Error(), nil)
+}
+
+func BindError(c *gin.Context, err error) {
+	c.JSON(http.StatusBadRequest, bindErrorResponse(err))
 }
 
 func InvalidArgumentError(c *gin.Context, err error) {
-	c.JSON(http.StatusBadRequest, argumentError(err))
+	Error(c, InvalidArgument, err.Error(), nil)
 }
-
-

@@ -67,3 +67,24 @@ func (conf *Config) GetHttpWriteTimeout() time.Duration {
 func (conf *Config) GetDefaultLanguage() string {
 	return conf.Server.Lang
 }
+
+func (conf *Config) GetAcceptLang() []string {
+	if len(conf.AcceptLang) > 0 {
+		return conf.AcceptLang
+	}
+
+	return []string{conf.GetDefaultLanguage()}
+}
+
+func (conf *Config) GetNeedLoadLangFile() (files []string) {
+	for _, lang := range conf.GetAcceptLang() {
+		if lang != "" && lang != "und" {
+			files = append(files, fmt.Sprintf("./conf/lang/%s.json", lang))
+		}
+	}
+	return
+}
+
+func (conf *Config) GetJwtSecret() string {
+	return conf.Server.Http.JwtSecret
+}
