@@ -64,8 +64,12 @@ func (conf *Config) GetHttpWriteTimeout() time.Duration {
 	return conf.Http.WriteTimeout * time.Second
 }
 
-func (conf *Config) GetDefaultLanguage() string {
+func (conf *Config) GetLanguage() string {
 	return conf.Server.Lang
+}
+
+func GetDefaultLanguage() string {
+	return New().GetLanguage()
 }
 
 func (conf *Config) GetAcceptLang() []string {
@@ -73,7 +77,7 @@ func (conf *Config) GetAcceptLang() []string {
 		return conf.AcceptLang
 	}
 
-	return []string{conf.GetDefaultLanguage()}
+	return []string{conf.GetLanguage()}
 }
 
 func (conf *Config) GetNeedLoadLangFile() (files []string) {
@@ -87,4 +91,8 @@ func (conf *Config) GetNeedLoadLangFile() (files []string) {
 
 func (conf *Config) GetJwtSecret() string {
 	return conf.Server.Http.JwtSecret
+}
+
+func IsSingleModel() bool {
+	return New().Server.LangMode == "single"
 }

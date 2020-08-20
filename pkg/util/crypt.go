@@ -2,7 +2,6 @@ package util
 
 import (
 	"golang.org/x/crypto/bcrypt"
-	"log"
 )
 
 func GeneratePassword(password string) (string, error) {
@@ -25,7 +24,6 @@ func MustGeneratePassword(password string) string {
 
 func ConfirmPassword(hash, password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	log.Println(err)
 
 	return err == nil
 }

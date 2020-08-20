@@ -14,8 +14,7 @@ func Translator(bundle *i18n.Bundle) gin.HandlerFunc {
 			lang = c.GetHeader("Accept-Language")
 		}
 		if lang == "" {
-			config := configs.New()
-			lang = config.GetDefaultLanguage()
+			lang = configs.GetDefaultLanguage()
 		}
 		locales.New(bundle, lang)
 	}

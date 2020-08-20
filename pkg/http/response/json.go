@@ -11,7 +11,7 @@ type response struct {
 	Code    Code        `json:"code"`
 	Message string      `json:"message,omitempty"`
 	Errors  []string    `json:"errors,omitempty"`
-	Data    interface{} `json:"module"`
+	Data    interface{} `json:"data"`
 }
 
 func successResponse(data interface{}) *response {

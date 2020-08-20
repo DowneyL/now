@@ -5,9 +5,9 @@ import (
 )
 
 func Migrate() error {
+	// Migrate table `user`
 	rootName := "august5th"
 	user := &User{}
-
 	if err := WriteDB.AutoMigrate(&User{}).Error; err != nil {
 		return err
 	}
@@ -18,6 +18,11 @@ func Migrate() error {
 		if err := WriteDB.Create(user).Error; err != nil {
 			return err
 		}
+	}
+
+	// Migrate table `occupation`
+	if err := WriteDB.AutoMigrate(&Occupation{}).Error; err != nil {
+		return err
 	}
 
 	return nil

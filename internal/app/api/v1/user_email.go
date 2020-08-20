@@ -10,7 +10,7 @@ import (
 var json AddressJSON
 
 type AddressJSON struct {
-	Email string `json:"email" binding:"required,email"`
+	Email string `req:"email" binding:"required,email"`
 }
 
 func SetEmail(c *gin.Context) {

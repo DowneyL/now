@@ -23,6 +23,10 @@ func New(bundle *i18n.Bundle, lang string) *Translate {
 	return Translator
 }
 
+func GetLanguage() string {
+	return Translator.languageTag.String()
+}
+
 func (tran *Translate) GetLanguageTag() language.Tag {
 	return tran.languageTag
 }

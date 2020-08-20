@@ -21,5 +21,6 @@ func apiV1(r *gin.Engine) {
 	group.Use(middleware.Jwt())
 	{
 		group.POST("/user/email", v1.SetEmail)
+		group.POST("/occupation", v1.CreateOccupation)
 	}
 }

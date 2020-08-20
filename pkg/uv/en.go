@@ -16,7 +16,7 @@ func RegisterEnTranslation(validate *validator.Validate) {
 	if err := enTranslation.RegisterDefaultTranslations(validate, Trans); err != nil {
 		log.Fatalf("universal Trans register failed: %v\n", err)
 	}
-	if err := registerLocaleTranslation(validate, NotExistsTag, "{0} is already exists"); err != nil {
+	if err := registerLocaleTranslation(validate, LanguageTag, "{0} is a wrong language type"); err != nil {
 		log.Fatalln("register locale translation failed")
 	}
 }
