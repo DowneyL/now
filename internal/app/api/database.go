@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/DowneyL/now/models"
-	gresp "github.com/DowneyL/now/packages/http/response"
+	"github.com/DowneyL/now/internal/models"
+	gresp "github.com/DowneyL/now/pkg/http/response"
 	"github.com/gin-gonic/gin"
 )
 

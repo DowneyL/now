@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"github.com/DowneyL/now/models"
-	gresp "github.com/DowneyL/now/packages/http/response"
-	"github.com/DowneyL/now/packages/locales"
+	"github.com/DowneyL/now/internal/models"
+	gresp "github.com/DowneyL/now/pkg/http/response"
+	"github.com/DowneyL/now/pkg/locales"
 	"github.com/gin-gonic/gin"
 )
 

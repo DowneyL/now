@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/DowneyL/now/packages/configs"
-	"github.com/DowneyL/now/packages/locales"
+	"github.com/DowneyL/now/pkg/configs"
+	"github.com/DowneyL/now/pkg/locales"
 	"github.com/gin-gonic/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 )

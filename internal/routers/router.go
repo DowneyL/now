@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"github.com/DowneyL/now/middlewares"
-	"github.com/DowneyL/now/packages/configs"
-	"github.com/DowneyL/now/packages/uv"
+	"github.com/DowneyL/now/internal/middleware"
+	"github.com/DowneyL/now/pkg/configs"
+	"github.com/DowneyL/now/pkg/uv"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"

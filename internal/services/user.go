@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/DowneyL/now/models"
-	"github.com/DowneyL/now/packages/util"
+	"github.com/DowneyL/now/internal/models"
+	"github.com/DowneyL/now/pkg/util"
 )
 
 func Register(username, password string) (user *models.User, auth util.Auth, err error) {

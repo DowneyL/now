@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/DowneyL/now/packages/util"
+	"github.com/DowneyL/now/pkg/util"
 	"github.com/jinzhu/gorm"
 	"time"
 )

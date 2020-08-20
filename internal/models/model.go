@@ -2,8 +2,8 @@ package models
 
 import (
 	"fmt"
-	"github.com/DowneyL/now/packages/configs"
-	"github.com/DowneyL/now/packages/util"
+	"github.com/DowneyL/now/pkg/configs"
+	"github.com/DowneyL/now/pkg/util"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"

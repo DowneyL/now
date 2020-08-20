@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/DowneyL/now/models"
-	"github.com/DowneyL/now/packages/configs"
-	"github.com/DowneyL/now/routers"
+	"github.com/DowneyL/now/internal/models"
+	"github.com/DowneyL/now/internal/routers"
+	"github.com/DowneyL/now/pkg/configs"
 	"log"
 	"net/http"
 )

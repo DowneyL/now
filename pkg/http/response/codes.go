@@ -2,7 +2,7 @@ package gresp
 
 import (
 	"fmt"
-	"github.com/DowneyL/now/packages/locales"
+	"github.com/DowneyL/now/pkg/locales"
 )
 
 type Code uint32

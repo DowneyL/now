@@ -1,7 +1,7 @@
 package util
 
 import (
-	"github.com/DowneyL/now/packages/configs"
+	"github.com/DowneyL/now/pkg/configs"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )

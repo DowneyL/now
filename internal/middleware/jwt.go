@@ -1,10 +1,10 @@
 package middleware
 
 import (
-	"github.com/DowneyL/now/models"
-	gresp "github.com/DowneyL/now/packages/http/response"
-	"github.com/DowneyL/now/packages/locales"
-	"github.com/DowneyL/now/packages/util"
+	"github.com/DowneyL/now/internal/models"
+	gresp "github.com/DowneyL/now/pkg/http/response"
+	"github.com/DowneyL/now/pkg/locales"
+	"github.com/DowneyL/now/pkg/util"
 	"github.com/gin-gonic/gin"
 	"time"
 )

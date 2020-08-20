@@ -35,7 +35,7 @@ func New() *Config {
 }
 
 func getPath(name string) string {
-	return fmt.Sprintf("./conf/%s.ini", name)
+	return fmt.Sprintf("./configs/%s.ini", name)
 }
 
 func load(section string, v interface{}) {
@@ -79,7 +79,7 @@ func (conf *Config) GetAcceptLang() []string {
 func (conf *Config) GetNeedLoadLangFile() (files []string) {
 	for _, lang := range conf.GetAcceptLang() {
 		if lang != "" && lang != "und" {
-			files = append(files, fmt.Sprintf("./conf/lang/%s.json", lang))
+			files = append(files, fmt.Sprintf("./configs/lang/%s.json", lang))
 		}
 	}
 	return

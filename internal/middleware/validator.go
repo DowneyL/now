@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/DowneyL/now/packages/locales"
-	"github.com/DowneyL/now/packages/uv"
+	"github.com/DowneyL/now/pkg/locales"
+	"github.com/DowneyL/now/pkg/uv"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"golang.org/x/text/language"

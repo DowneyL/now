@@ -1,7 +1,7 @@
 package gresp
 
 import (
-	uv "github.com/DowneyL/now/packages/uv"
+	"github.com/DowneyL/now/pkg/uv"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"net/http"
@@ -11,7 +11,7 @@ type response struct {
 	Code    Code        `json:"code"`
 	Message string      `json:"message,omitempty"`
 	Errors  []string    `json:"errors,omitempty"`
-	Data    interface{} `json:"data"`
+	Data    interface{} `json:"module"`
 }
 
 func successResponse(data interface{}) *response {
@@ -53,7 +53,7 @@ func Success(c *gin.Context, data interface{}) {
 }
 
 func Error(c *gin.Context, code Code, message string, messages []string) {
-	c.JSON(http.StatusBadRequest, errorResponse(code, message, messages))
+	c.JSON(http.StatusInternalServerError, errorResponse(code, message, messages))
 }
 
 func ServerError(c *gin.Context, err error) {
@@ -65,7 +65,7 @@ func FailedError(c *gin.Context, err error) {
 }
 
 func BindError(c *gin.Context, err error) {
-	c.JSON(http.StatusBadRequest, bindErrorResponse(err))
+	c.JSON(http.StatusInternalServerError, bindErrorResponse(err))
 }
 
 func InvalidArgumentError(c *gin.Context, err error) {
