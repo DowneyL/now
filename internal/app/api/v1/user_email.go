@@ -25,7 +25,7 @@ func SetEmail(c *gin.Context) {
 		return
 	}
 	if err := models.UpdateUserEmail(user, json.Email); err != nil {
-		gresp.ServerError(c, locales.MustTransRespError("internal"))
+		gresp.ServerInternalError(c)
 		return
 	}
 

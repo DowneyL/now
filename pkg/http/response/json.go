@@ -1,6 +1,7 @@
 package gresp
 
 import (
+	"github.com/DowneyL/now/pkg/locales"
 	"github.com/DowneyL/now/pkg/uv"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -58,6 +59,10 @@ func Error(c *gin.Context, code Code, message string, messages []string) {
 
 func ServerError(c *gin.Context, err error) {
 	Error(c, Internal, err.Error(), nil)
+}
+
+func ServerInternalError(c *gin.Context) {
+	ServerError(c, locales.MustTransRespError("internal"))
 }
 
 func FailedError(c *gin.Context, err error) {
