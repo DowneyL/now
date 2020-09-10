@@ -20,7 +20,8 @@ func apiV1(r *gin.Engine) {
 	group := r.Group("/api/v1")
 	group.Use(middleware.Jwt())
 	{
-		group.POST("/user/email", v1.SetEmail)
+		group.PATCH("/user/email", v1.SetEmail)
+		group.PATCH("/user", v1.EditUser)
 		group.POST("/occupation", v1.CreateOccupation)
 	}
 }

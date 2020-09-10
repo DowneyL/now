@@ -9,27 +9,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var json UserJSON
-
-type UserJSON struct {
-	Name     string `json:"name" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
+var registerInfo models.RegisterInfo
 
 func Register(c *gin.Context) {
-	if err := c.ShouldBindJSON(&json); err != nil {
+	if err := c.ShouldBindJSON(&registerInfo); err != nil {
 		gresp.BindError(c, err)
 		return
 	}
 
-	if user := models.FindUserByName(json.Name); user.ID != 0 {
+	if user := models.FindUserByName(registerInfo.Name); user.ID != 0 {
 		gresp.FailedError(c, locales.MustTransRespError("username_already_exists"))
 		return
 	}
 
-	user, auth, err := services.Register(json.Name, json.Password)
+	user, auth, err := services.Register(registerInfo.Name, registerInfo.Password)
 	if err != nil {
-		gresp.ServerError(c, locales.MustTransRespError("internal"))
+		gresp.ServerInternalError(c)
 		return
 	}
 
@@ -40,12 +35,12 @@ func Register(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-	if err := c.ShouldBindJSON(&json); err != nil {
+	if err := c.ShouldBindJSON(&registerInfo); err != nil {
 		gresp.BindError(c, err)
 		return
 	}
 
-	user := models.FindUserByName(json.Name)
+	user := models.FindUserByName(registerInfo.Name)
 	if user.ID == 0 {
 		gresp.FailedError(c, locales.MustTransRespError("user_not_exists"))
 		return
@@ -56,14 +51,14 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	if flag := util.ConfirmPassword(user.Password, json.Password); !flag {
+	if flag := util.ConfirmPassword(user.Password, registerInfo.Password); !flag {
 		gresp.FailedError(c, locales.MustTransRespError("wrong_password"))
 		return
 	}
 
 	auth, err := util.GenerateAuth(user.Name, user.Password)
 	if err != nil {
-		gresp.ServerError(c, locales.MustTransRespError("internal"))
+		gresp.ServerInternalError(c)
 		return
 	}
 
